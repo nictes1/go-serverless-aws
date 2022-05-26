@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/nictes/workspace/go/src/github.com/nictes1/go-serverless-aws'
+make: Leaving directory '/home/nictes/workspace/go/src/github.com/nictes1/go-serverless-aws'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+
