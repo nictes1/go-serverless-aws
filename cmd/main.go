@@ -23,14 +23,14 @@ func main() {
 
 	if err != nil {
 		return
-
-	dynaClient := dynamodb.New(awsSession)
+	}
+	dynaClient = dynamodb.New(awsSession)
 	lambda.Start(handler)
 }
 
-const tableName = "LambdaInGoUser"
+const tableName = "go-serverless-API"
 
-func Handler(req events.APIGatewayProxyRequest) *events.APIGatewayProxyResponse {
+func handler(req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	switch req.HTTPMethod {
 	case "GET":
 		return handlers.GetUser(req, tableName, dynaClient)
@@ -40,6 +40,7 @@ func Handler(req events.APIGatewayProxyRequest) *events.APIGatewayProxyResponse 
 		return handlers.UpdateUser(req, tableName, dynaClient)
 	case "DELETE":
 		return handlers.DeleteUser(req, tableName, dynaClient)
+	default:
+		return handlers.UnhandledMethod()
 	}
-	return handlers.UnhandledMethod() 
 }
